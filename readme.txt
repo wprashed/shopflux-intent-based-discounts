@@ -1,5 +1,5 @@
-=== Intent-Based Discounts ===
-Contributors: wprashed
+=== ShopFlux Intent-Based Discounts ===
+Contributors: bappy6652
 Tags: woocommerce, coupon, discounts, exit-intent, cart
 Requires at least: 6.0
 Tested up to: 6.9
@@ -22,7 +22,7 @@ Features:
 * Automatic WooCommerce coupon creation/sync from plugin settings.
 * Configurable modal title, message, and CTA button text.
 * Optional once-per-session offer display.
-* Translation-ready text domain: `intent-based-discounts`.
+* Translation-ready text domain: `shopflux-intent-based-discounts`.
 
 == Installation ==
 
