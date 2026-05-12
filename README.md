@@ -10,7 +10,7 @@ Intent-Based Discounts is a WooCommerce extension that automatically offers a co
 - Auto-create/update coupon from settings.
 - Configurable modal content.
 - Option to show once per browser session.
-- Internationalization-ready strings (`intent-based-discounts`).
+- Internationalization-ready strings (`shopflux-intent-based-discounts`).
 
 ## Requirements
 
@@ -20,7 +20,7 @@ Intent-Based Discounts is a WooCommerce extension that automatically offers a co
 
 ## Installation
 
-1. Place this directory in `wp-content/plugins/intent-based-discounts`.
+1. Place this directory in `wp-content/plugins/shopflux-intent-based-discounts`.
 2. Activate **Intent-Based Discounts** in WordPress admin.
 3. Go to **Settings > Intent Discounts**.
 4. Configure coupon and trigger settings, then save.
