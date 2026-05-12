@@ -1,4 +1,4 @@
-# Intent-Based Discounts
+# ShopFlux - Intent-Based Discounts
 
 Intent-Based Discounts is a WooCommerce extension that automatically offers a coupon when users show exit intent or stay inactive.
 
