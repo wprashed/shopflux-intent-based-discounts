@@ -1,21 +1,21 @@
 (function () {
   'use strict';
 
-  if (typeof IBDConfig === 'undefined') {
+  if (typeof ShopFluxIBDConfig === 'undefined') {
     return;
   }
 
   var hasShown = false;
   var inactivityTimer = null;
-  var i18n = IBDConfig.i18n || {};
+  var i18n = ShopFluxIBDConfig.i18n || {};
 
   function isOfferAlreadyShown() {
-    if (!IBDConfig.oncePerSession) {
+    if (!ShopFluxIBDConfig.oncePerSession) {
       return false;
     }
 
     try {
-      return window.sessionStorage.getItem(IBDConfig.storageKey) === '1';
+      return window.sessionStorage.getItem(ShopFluxIBDConfig.storageKey) === '1';
     } catch (e) {
       return false;
     }
@@ -23,12 +23,12 @@
 
   function markOfferShown() {
     hasShown = true;
-    if (!IBDConfig.oncePerSession) {
+    if (!ShopFluxIBDConfig.oncePerSession) {
       return;
     }
 
     try {
-      window.sessionStorage.setItem(IBDConfig.storageKey, '1');
+      window.sessionStorage.setItem(ShopFluxIBDConfig.storageKey, '1');
     } catch (e) {
       // Ignore storage failures in restricted browsers.
     }
@@ -36,37 +36,37 @@
 
   function createModal(offer) {
     var overlay = document.createElement('div');
-    overlay.className = 'ibd-overlay';
+    overlay.className = 'shopflux-ibd-overlay';
 
     var modal = document.createElement('div');
-    modal.className = 'ibd-modal';
+    modal.className = 'shopflux-ibd-modal';
 
     var closeButton = document.createElement('button');
     closeButton.type = 'button';
-    closeButton.className = 'ibd-close';
+    closeButton.className = 'shopflux-ibd-close';
     closeButton.innerHTML = '&times;';
     closeButton.setAttribute('aria-label', i18n.close || 'Close');
 
     var title = document.createElement('h3');
-    title.className = 'ibd-title';
+    title.className = 'shopflux-ibd-title';
     title.textContent = offer.title;
 
     var message = document.createElement('p');
-    message.className = 'ibd-message';
+    message.className = 'shopflux-ibd-message';
     message.textContent = offer.message;
 
     var code = document.createElement('div');
-    code.className = 'ibd-coupon';
+    code.className = 'shopflux-ibd-coupon';
     code.textContent = offer.couponCode;
 
     var actionButton = document.createElement('button');
     actionButton.type = 'button';
-    actionButton.className = 'ibd-apply';
+    actionButton.className = 'shopflux-ibd-apply';
     actionButton.textContent = offer.buttonLabel;
 
     var fallbackLink = document.createElement('a');
     fallbackLink.href = offer.applyUrl;
-    fallbackLink.className = 'ibd-fallback-link';
+    fallbackLink.className = 'shopflux-ibd-fallback-link';
     fallbackLink.textContent = i18n.fallback || 'Go to cart manually';
 
     closeButton.addEventListener('click', function () {
@@ -84,11 +84,11 @@
       actionButton.textContent = i18n.applying || 'Applying...';
 
       var data = new URLSearchParams();
-      data.append('action', 'ibd_apply_offer');
-      data.append('nonce', IBDConfig.nonce);
+      data.append('action', 'shopflux_ibd_apply_offer');
+      data.append('nonce', ShopFluxIBDConfig.nonce);
       data.append('couponCode', offer.couponCode);
 
-      fetch(IBDConfig.ajaxUrl, {
+      fetch(ShopFluxIBDConfig.ajaxUrl, {
         method: 'POST',
         credentials: 'same-origin',
         headers: {
@@ -131,10 +131,10 @@
     markOfferShown();
 
     var data = new URLSearchParams();
-    data.append('action', 'ibd_get_offer');
-    data.append('nonce', IBDConfig.nonce);
+    data.append('action', 'shopflux_ibd_get_offer');
+    data.append('nonce', ShopFluxIBDConfig.nonce);
 
-    fetch(IBDConfig.ajaxUrl, {
+    fetch(ShopFluxIBDConfig.ajaxUrl, {
       method: 'POST',
       credentials: 'same-origin',
       headers: {
@@ -156,7 +156,7 @@
   }
 
   function setupExitIntent() {
-    if (!IBDConfig.exitIntentEnabled) {
+    if (!ShopFluxIBDConfig.exitIntentEnabled) {
       return;
     }
 
@@ -172,7 +172,7 @@
   }
 
   function resetInactivityTimer() {
-    if (!IBDConfig.inactivityEnabled) {
+    if (!ShopFluxIBDConfig.inactivityEnabled) {
       return;
     }
 
@@ -182,11 +182,11 @@
 
     inactivityTimer = window.setTimeout(function () {
       requestOffer();
-    }, Math.max(5, Number(IBDConfig.inactivitySeconds)) * 1000);
+    }, Math.max(5, Number(ShopFluxIBDConfig.inactivitySeconds)) * 1000);
   }
 
   function setupInactivity() {
-    if (!IBDConfig.inactivityEnabled) {
+    if (!ShopFluxIBDConfig.inactivityEnabled) {
       return;
     }
 
